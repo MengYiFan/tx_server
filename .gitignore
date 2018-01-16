@@ -2,12 +2,12 @@ node_modules/
 issue
 npm-debug.log
 
-logs/error/*
-logs/response/*
+#logs/error/*
+#logs/response/*
 public/images/
 uploadfiles/temp/*
-config/development.js
-config/test.js
+#config/development.js
+#config/test.js
 
 # Windows image file caches
 Thumbs.db
