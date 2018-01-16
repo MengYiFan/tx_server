@@ -1,0 +1,11 @@
+{
+    "name": "localhost3000",
+    "script": "bin/www",
+    "cwd": "./",
+    "exec_mode": "fork",
+    "watch": true,
+    "ignore_watch": ["logs"],
+    "engines": {
+        "node": ">=7.6"
+    }
+}

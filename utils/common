@@ -1,0 +1,196 @@
+'use strict';
+
+/**
+ * 返回数据对应的类型
+ * @param  {[all]} data [数据]
+ * @return {[string]}      [e.g. array function object null...]
+ */
+var getDataType = (data) => {
+  return toString.call(data).replace(/[\[\]]/ig, '').split(' ')[1].toLowerCase()
+}
+
+/**
+ * 是否在这个数组里
+ * @param  {[string]} val [需要检测的数据]
+ * @param  {[array]} arr [检测数据容器]
+ * @return {[Boolean]}     [返回结果]
+ */
+var isInArr = (val, arr) => {
+  if (typeof val === 'object' || getDataType(arr) !== 'array') {
+    return false
+  }
+  return arr.indexOf(val) == -1 ? false : true
+}
+
+var checkObjectType = (data, type) => {
+  if (typeof type !== 'string') 
+    return false
+  if (getDataType(data) === type) 
+    return true
+  return false
+}
+
+/**
+ * 判断参数是否不合规
+ * @param  {[json]} checkObject [检查对象]
+ * @param  {[array]} paramsArr   [检测范本]
+ * @return {[json]}             [返回ret结果]
+ */
+var paramsIsLegal = (checkObject, paramsArr, nullable = false) => {
+  if (!checkObjectType(checkObject, 'object') || !checkObjectType(paramsArr, 'array')) {
+    return {
+      ret: false,
+      errMsg: '格式错误'
+    }
+  }
+
+  let data = []
+  let keyArr = []
+  let json = {}
+  let {entries} = Object
+
+  for (let obj of paramsArr) {
+      let key = obj.key
+      let type = obj.type
+      let name = obj.name
+      let checkVal = checkObject[key]
+      if (nullable) {
+        //可以为空，不做检查
+      } else {
+        // 数值不能为空
+        if (typeof checkVal === 'undefined' || checkVal === '') {
+          return {
+            ret: false,
+            errMsg: `${name} 不能为空.`
+          }
+        }
+        // 数值类型对头
+        if (type.toLowerCase() == 'number') {
+          checkVal = parseFloat(checkVal)
+        }
+
+        if (type.toLowerCase() !== getDataType(checkVal)) {
+          return {
+            ret: false,
+            errMsg: `${name} 需要为${type}类型`
+          }
+        }
+
+        if (type.toLowerCase() == 'array') {
+          try {
+            if (checkVal.length == 0) {
+              return {
+                ret: false,
+                errMsg: `${name} 不能为空`
+              }
+            }
+            checkVal = JSON.stringify(checkVal)
+          } catch(e) {
+            
+          }
+        }
+      }
+
+      keyArr.push(key)
+      json[key] = checkVal
+      data.push(checkVal || '')
+  }
+
+  return {
+    ret: true,
+    data,
+    json
+  }
+}
+
+/**
+ * 字符串 驼峰转_
+ * @param  {[type]} str [字符串]
+ * @return {[type]}     [转换后的字符串]
+ */
+var hump2_ = (str) => {
+  return str.replace( /[A-Z]/g, function( i ) {
+    return '_' + i.toLowerCase();
+  })
+}
+
+/**
+ * 字符串 _转驼峰写法
+ * @param  {[type]} str [字符串]
+ * @return {[type]}     [转换后的字符串]
+ */
+var _2hump = (str) => {
+  return str.replace( /_([a-z])/g, function( all, i ){
+    return i.toUpperCase()
+  })
+}
+
+/**
+ * 将数据对象转为驼峰写法
+ * @param  {[type]} data [数据对象]
+ * @return {[type]}      [转换后的对象]
+ */
+var data2hump = (data) => {
+  let keys = Object.keys(data),
+      newData = {}
+  for (let k of keys) {
+    newData[_2hump(k)] = data[k] || ''
+  }
+  return newData
+}
+
+/**
+ * 将数据对象转为后台的_写法
+ * @param  {[type]} data [数据对象]
+ * @return {[type]}      [转换后的对象]
+ */
+var data2_ = (data) => {
+  let keys = Object.keys(data),
+      newData = {}
+  for (let k of keys) {
+    newData[hump2_(k)] = data[k]
+  }
+  return newData
+}
+
+/**
+ * 基于时间戳生成openid
+ * @type {[type]}
+ */
+var createOpenid = () => {
+  const uuidV1 = require('uuid/v1')
+  return uuidV1()
+}
+
+/**
+ * 数组转JSON, 用于postman测试
+ * @param  {[array]} arr [要转换的数组]
+ * @return {[string]}     [json字符串]
+ */
+var postman = (arr) => {
+  return '{' + arr.reduce((a, b) => {
+  for ( let [key, val] of Object.entries(b) ) {
+    a = `${a},\n  "${key}":"${val}"`
+  }
+    return a
+  }, '').slice(1) + '\n}'
+}
+
+var log = (...arr) => {
+  console.log('\n-----------------')
+  for (var val of arr) {
+    console.log(`\n${val.title}: `, val.value)
+  }
+  console.log('\n-----------------\n')
+}
+
+module.exports = {
+  getDataType,
+  isInArr,
+  paramsIsLegal,
+  checkObjectType,
+  log,
+  data2hump,
+  data2_,
+  createOpenid
+}
