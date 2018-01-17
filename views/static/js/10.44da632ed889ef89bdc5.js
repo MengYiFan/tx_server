@@ -1,0 +1,2 @@
+webpackJsonp([10],{FoUn:function(n,t){},d958:function(n,t,e){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o={render:function(){var n=this.$createElement;return(this._self._c||n)("div",{staticClass:"index"},[this._v("\n  QRCODE\n")])},staticRenderFns:[]};var s=e("VU/8")({data:function(){return{}},computed:{},components:{},methods:{},mounted:function(){}},o,!1,function(n){e("FoUn")},null,null);t.default=s.exports}});
+//# sourceMappingURL=10.44da632ed889ef89bdc5.js.map
