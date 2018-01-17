@@ -1,0 +1,73 @@
+[2018-01-17 08:37:29.550] [INFO] resLogger - 
+*************** response log start ***************
+request method: GET
+request originalUrl:  /patient
+request client ip:  ::1
+request query:  {}
+response time: 6
+response status: 200
+response body: 
+{"_readableState":{"objectMode":false,"highWaterMark":65536,"buffer":{"head":null,"tail":null,"length":0},"length":0,"pipes":null,"pipesCount":0,"flowing":null,"ended":false,"endEmitted":false,"reading":false,"sync":true,"needReadable":false,"emittedReadable":false,"readableListening":false,"resumeScheduled":false,"defaultEncoding":"utf8","ranOut":false,"awaitDrain":0,"readingMore":false,"decoder":null,"encoding":null},"readable":true,"domain":null,"_events":{},"_eventsCount":2,"path":"/Users/mz_zml/Desktop/前端笔试题2018/www/views/index.html","fd":null,"flags":"r","mode":438,"autoClose":true,"bytesRead":0}
+*************** response log end ***************
+
+[2018-01-17 08:37:30.597] [INFO] resLogger - 
+*************** response log start ***************
+request method: GET
+request originalUrl:  /api/user//patients/current
+request client ip:  ::1
+request query:  {}
+response time: 0
+response status: 404
+response body: 
+undefined
+*************** response log end ***************
+
+[2018-01-17 08:37:30.729] [INFO] resLogger - 
+*************** response log start ***************
+request method: POST
+request originalUrl:  /api/user/create
+request client ip:  ::1
+request body: 
+{}
+response time: 133
+response status: 200
+response body: 
+{"ret":true,"data":{"userId":"99cdee10-fb1e-11e7-bcd5-8b94166e8be6"}}
+*************** response log end ***************
+
+[2018-01-17 08:37:30.738] [INFO] resLogger - 
+*************** response log start ***************
+request method: GET
+request originalUrl:  /404
+request client ip:  ::1
+request query:  {}
+response time: 0
+response status: 200
+response body: 
+{"ret":false,"errCode":404,"errMsg":"NOT FOUND"}
+*************** response log end ***************
+
+[2018-01-17 08:37:30.960] [INFO] resLogger - 
+*************** response log start ***************
+request method: GET
+request originalUrl:  /favicon.ico
+request client ip:  ::1
+request query:  {}
+response time: 0
+response status: 404
+response body: 
+undefined
+*************** response log end ***************
+
+[2018-01-17 08:37:30.973] [INFO] resLogger - 
+*************** response log start ***************
+request method: GET
+request originalUrl:  /404
+request client ip:  ::1
+request query:  {}
+response time: 0
+response status: 200
+response body: 
+{"ret":false,"errCode":404,"errMsg":"NOT FOUND"}
+*************** response log end ***************
+
